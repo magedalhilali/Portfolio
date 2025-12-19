@@ -53,10 +53,10 @@ export const projects: Project[] = [
     colSpan: "md:col-span-3 md:row-span-1", // Changed to 3 (50% width)
     description: "Graduated Top of the Class of 2025 with a 3.97 GPA and 'Excellent with Honors' distinction. Bridging financial rigor with global communication..",
     longDescription: "My educational background combines rigorous financial training with a dedication to linguistic mastery, fostering a global perspective on business and culture.",
-    image: "Graduation1.jpeg", 
+    image: "/Portfolio/Graduation1.jpeg", 
     galleryImages: [
-      "Graduation1.jpeg", 
-      "Graduation2.jpg"  
+      "/Portfolio/Graduation1.jpeg", 
+      "/Portfolio/Graduation3.jpg"  
     ],
     education: {
       university: "University of Liwa University",
@@ -81,8 +81,8 @@ export const projects: Project[] = [
     iconKey: "gamepad",
     description: "A solo-developed survival-horror game in Unreal Engine, blending modern settings with medieval mystery.",
     longDescription: "One crash changed everything.\n\nAfter striking a deer on a desolate highway, you awaken to a nightmare. The car is wrecked. Your brother, Elias, is missing. The only clue is a trail of blood leading deep into the jungle.\n\nBut what lies within the trees shouldn't exist.\n\nWhispers in the Light is a story-intensive survival horror game where the lines between the past and present blur. Explore a mysterious medieval village hidden within modern times, uncover the dark secrets of its inhabitants, and survive long enough to find your brother.\n\nDevelopment Note:\nCreated in Unreal Engine as part of the Endless Studios Capstone 7 program. This project represents my first venture into solo game development, focusing on environmental storytelling, level design, and atmospheric tension.",
-    image: "https://images.unsplash.com/photo-1614332625575-6bef549fcc7b?q=80&w=3841&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", 
-    detailImage: "https://images.unsplash.com/photo-1614332625575-6bef549fcc7b?q=80&w=3841&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    image: "/Portfolio/trailer.png", 
+    detailImage: "/Portfolio/trailer.png",
     youtubeId: "d9ynQtk7WwQ", 
     colSpan: "md:col-span-3", // Changed from 2 to 3 (50% width)
   },
