@@ -1,0 +1,138 @@
+import React, { useEffect, useRef, useState } from 'react';
+import Lenis from 'lenis';
+import { AnimatePresence, motion } from 'framer-motion';
+import CustomCursor from './components/CustomCursor';
+import Hero from './components/Hero';
+import BentoGrid from './components/BentoGrid';
+import Achievements from './components/Achievements';
+import Footer from './components/Footer';
+import BackgroundPattern from './components/BackgroundPattern';
+import ProjectDetail from './components/ProjectDetail';
+import UnicornBackground from './components/UnicornBackground';
+import { projects } from './data';
+
+const App: React.FC = () => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [selectedProjectId, setSelectedProjectId] = useState<number | null>(null);
+
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+    });
+
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
+
+  const handleProjectSelect = (id: number) => {
+    setSelectedProjectId(id);
+  };
+
+  const handleBackToHome = () => {
+    setSelectedProjectId(null);
+  };
+
+  const handleNextProject = () => {
+    if (selectedProjectId === null) return;
+    
+    const currentIndex = projects.findIndex(p => p.id === selectedProjectId);
+    const nextIndex = (currentIndex + 1) % projects.length;
+    setSelectedProjectId(projects[nextIndex].id);
+  };
+
+  // --- NEW: Handle Previous Project ---
+  const handlePreviousProject = () => {
+    if (selectedProjectId === null) return;
+    
+    const currentIndex = projects.findIndex(p => p.id === selectedProjectId);
+    // Logic to wrap around to the last project if we are at the start
+    const prevIndex = (currentIndex - 1 + projects.length) % projects.length;
+    setSelectedProjectId(projects[prevIndex].id);
+  };
+
+  // Find the full project object based on ID
+  const selectedProject = projects.find(p => p.id === selectedProjectId);
+  const selectedProjectIndex = selectedProjectId !== null ? projects.findIndex(p => p.id === selectedProjectId) : -1;
+  
+  // --- NEW: Identify First Project ---
+  const isFirstProject = selectedProjectIndex === 0;
+  const isLastProject = selectedProjectIndex === projects.length - 1;
+
+  return (
+    <div ref={scrollRef} className="relative min-h-screen text-offwhite font-sans selection:bg-offwhite selection:text-charcoal cursor-none">
+      <CustomCursor />
+      
+      {/* Persistent Background Layer:
+        Mounted outside AnimatePresence so it doesn't unmount/flicker when views change.
+        Z-index set to -10 in component to stay behind everything.
+      */}
+      <UnicornBackground />
+      
+      <AnimatePresence mode="wait">
+        {selectedProjectId === null ? (
+          <motion.div
+            key="home"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            {/* Hero section placed outside main to allow full-width background */}
+            <Hero />
+            
+            <main className="relative z-10">
+              <BackgroundPattern>
+                <BentoGrid onProjectSelect={handleProjectSelect} />
+                <Achievements />
+                <Footer />
+              </BackgroundPattern>
+            </main>
+          </motion.div>
+        ) : (
+          <motion.div
+            key="project-detail"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            className="relative z-20"
+          >
+             <BackgroundPattern>
+                {selectedProject && (
+                  <ProjectDetail 
+                    project={selectedProject} 
+                    isFirstProject={isFirstProject} // <--- Added this prop
+                    isLastProject={isLastProject}
+                    onBack={handleBackToHome}
+                    onNext={handleNextProject}
+                    onPrevious={handlePreviousProject} // <--- Added this prop
+                  />
+                )}
+                {/* Re-using Footer for continuity in detail view, or remove if preferred */}
+                <Footer />
+             </BackgroundPattern>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      
+      {/* Background Noise/Texture optional overlay */}
+      <div className="fixed inset-0 z-0 pointer-events-none opacity-[0.03]" 
+           style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}>
+      </div>
+    </div>
+  );
+};
+
+export default App;
