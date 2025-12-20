@@ -38,19 +38,16 @@ const App: React.FC = () => {
 
   const handleProjectSelect = (id: number) => {
     setSelectedProjectId(id);
-    // Scroll to top when a project is selected
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleBackToHome = () => {
     setSelectedProjectId(null);
-    // Scroll to top when returning home
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleNextProject = () => {
     if (selectedProjectId === null) return;
-    
     const currentIndex = projects.findIndex(p => p.id === selectedProjectId);
     const nextIndex = (currentIndex + 1) % projects.length;
     setSelectedProjectId(projects[nextIndex].id);
@@ -59,7 +56,6 @@ const App: React.FC = () => {
 
   const handlePreviousProject = () => {
     if (selectedProjectId === null) return;
-    
     const currentIndex = projects.findIndex(p => p.id === selectedProjectId);
     const prevIndex = (currentIndex - 1 + projects.length) % projects.length;
     setSelectedProjectId(projects[prevIndex].id);
@@ -68,7 +64,6 @@ const App: React.FC = () => {
 
   const selectedProject = projects.find(p => p.id === selectedProjectId);
   const selectedProjectIndex = selectedProjectId !== null ? projects.findIndex(p => p.id === selectedProjectId) : -1;
-  
   const isFirstProject = selectedProjectIndex === 0;
   const isLastProject = selectedProjectIndex === projects.length - 1;
 
@@ -76,13 +71,13 @@ const App: React.FC = () => {
     <div ref={scrollRef} className="relative min-h-screen text-offwhite font-sans selection:bg-offwhite selection:text-charcoal cursor-none">
       <CustomCursor />
 
-      {/* --- WEBSITE LOGO (Fixed to top left) --- */}
+      {/* --- LOGO WITH REPO PATH FIX --- */}
       <motion.img 
-        initial={{ opacity: 0, y: -20 }}
+        initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.5 }}
-        src="/WebsiteLogo.png" 
-        alt="Maged Al Hilali Logo" 
+        transition={{ duration: 0.8, delay: 0.2 }}
+        src="/Portfolio/WebsiteLogo.png" 
+        alt="Logo" 
         className="fixed top-6 left-6 md:top-10 md:left-10 z-50 w-10 md:w-12 h-auto cursor-pointer hover:scale-110 transition-transform duration-300"
         onClick={handleBackToHome}
       />
@@ -99,7 +94,6 @@ const App: React.FC = () => {
             transition={{ duration: 0.5 }}
           >
             <Hero />
-            
             <main className="relative z-10">
               <BackgroundPattern>
                 <BentoGrid onProjectSelect={handleProjectSelect} />
@@ -134,7 +128,6 @@ const App: React.FC = () => {
         )}
       </AnimatePresence>
       
-      {/* Background Noise/Texture overlay */}
       <div className="fixed inset-0 z-0 pointer-events-none opacity-[0.03]" 
            style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}>
       </div>
