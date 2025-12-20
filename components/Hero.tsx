@@ -45,7 +45,7 @@ const Hero: React.FC = () => {
           <div className="absolute inset-0 bg-white/5 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           
           <img 
-            src="/Portfolio/WebsiteLogo.png" 
+            src="/Portfolio/WebsiteLogo2.png" 
             alt="Maged Al Hilali Logo" 
             // mix-blend-difference allows the logo to invert colors based on the background
             className="w-20 md:w-28 h-auto hover:scale-105 transition-all duration-300 mix-blend-difference backdrop-blur-[2px] brightness-110" 
