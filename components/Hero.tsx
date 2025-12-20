@@ -4,8 +4,6 @@ import { ArrowUpRight, Download, ArrowDown } from 'lucide-react';
 
 const Hero: React.FC = () => {
   const { scrollY } = useScroll();
-  // Transform scroll Y value (0 -> 100) to opacity (1 -> 0)
-  // This makes the indicator fade out immediately as the user starts scrolling
   const scrollIndicatorOpacity = useTransform(scrollY, [0, 100], [1, 0]);
 
   const containerVariants: Variants = {
@@ -33,21 +31,35 @@ const Hero: React.FC = () => {
   };
 
   return (
-    // FIX 1: Removed 'z-10' from this main section. 
-    // Z-index creates a "stacking context" that isolates the blend mode. 
-    // We will apply z-index ONLY to the buttons instead.
-    <section className="relative h-screen flex flex-col justify-center w-full pt-20 px-6 md:px-12 lg:px-24 bg-transparent pointer-events-none">
+    // Main section uses relative positioning and allows pointer events
+    <section className="relative h-screen flex flex-col justify-center w-full pt-20 px-6 md:px-12 lg:px-24 bg-transparent">
       
+      {/* --- LOGO ADDED HERE --- */}
+      <motion.div 
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.5 }}
+        // absolute position to place it in the top left corner
+        className="absolute top-8 left-8 md:top-12 md:left-12 z-30 pointer-events-auto"
+      >
+        <img 
+          src="/Portfolio/WebsiteLogo.png" 
+          alt="Maged Al Hilali Logo" 
+          // w-32/w-48 makes it large as requested. hover:scale adds interaction.
+          className="w-32 md:w-48 h-auto hover:scale-105 transition-transform duration-300" 
+        />
+      </motion.div>
+      {/* ------------------------- */}
+
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="w-full"
+        // Added pointer-events-none here so the text doesn't block the background interaction
+        className="w-full pointer-events-none"
       >
         {/* --- TITLE --- */}
         <div className="overflow-hidden">
-          {/* FIX 2: Changed 'text-offwhite' to 'text-white' (Pure #FFFFFF). 
-              Blend modes need pure white math to create pure black. */}
           <motion.h1 
             variants={itemVariants} 
             className="font-serif text-[12vw] leading-[0.9] tracking-tighter text-white mix-blend-difference"
@@ -68,7 +80,6 @@ const Hero: React.FC = () => {
         <div className="mt-12 md:mt-16">
           
           {/* --- BORDER LINE --- */}
-          {/* FIX 3: Switched to 'mix-blend-exclusion'. It is less buggy than 'difference' in some browsers. */}
           <div className="w-full h-px bg-white mb-8 mix-blend-exclusion" />
 
           <div className="flex flex-col md:flex-row md:items-center justify-between">
@@ -87,8 +98,7 @@ const Hero: React.FC = () => {
             </motion.div>
 
             {/* --- BUTTONS --- */}
-            {/* Added 'pointer-events-auto' so they are clickable (since we disabled it on the parent) */}
-            {/* Added 'z-50' to force them ABOVE everything else without trapping the blend modes above */}
+            {/* pointer-events-auto is crucial here to make buttons clickable */}
             <motion.div variants={itemVariants} className="flex gap-6 relative z-50 pointer-events-auto">
               <a 
                 href="https://www.linkedin.com/in/maged-mohammed-al-hilali-298764277/"
@@ -122,7 +132,7 @@ const Hero: React.FC = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 1 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 mix-blend-exclusion"
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 mix-blend-exclusion pointer-events-none"
       >
         <motion.div
           animate={{ y: [0, 10, 0] }}
