@@ -31,22 +31,20 @@ const Hero: React.FC = () => {
   };
 
   return (
-    // Main section uses relative positioning and allows pointer events
     <section className="relative h-screen flex flex-col justify-center w-full pt-20 px-6 md:px-12 lg:px-24 bg-transparent">
       
-      {/* --- LOGO ADDED HERE --- */}
+      {/* --- LOGO --- */}
       <motion.div 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.5 }}
-        // absolute position to place it in the top left corner
         className="absolute top-8 left-8 md:top-12 md:left-12 z-30 pointer-events-auto"
       >
         <img 
           src="/Portfolio/WebsiteLogo.png" 
           alt="Maged Al Hilali Logo" 
-          // w-32/w-48 makes it large as requested. hover:scale adds interaction.
-          className="w-32 md:w-48 h-auto hover:scale-105 transition-transform duration-300" 
+          // MODIFIED SIZES HERE: w-20 (80px) on mobile, md:w-28 (112px) on desktop
+          className="w-20 md:w-28 h-auto hover:scale-105 transition-transform duration-300" 
         />
       </motion.div>
       {/* ------------------------- */}
@@ -55,7 +53,6 @@ const Hero: React.FC = () => {
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        // Added pointer-events-none here so the text doesn't block the background interaction
         className="w-full pointer-events-none"
       >
         {/* --- TITLE --- */}
@@ -98,7 +95,6 @@ const Hero: React.FC = () => {
             </motion.div>
 
             {/* --- BUTTONS --- */}
-            {/* pointer-events-auto is crucial here to make buttons clickable */}
             <motion.div variants={itemVariants} className="flex gap-6 relative z-50 pointer-events-auto">
               <a 
                 href="https://www.linkedin.com/in/maged-mohammed-al-hilali-298764277/"
