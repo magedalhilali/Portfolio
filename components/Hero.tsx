@@ -33,7 +33,7 @@ const Hero: React.FC = () => {
   return (
     <section className="relative h-screen flex flex-col justify-center w-full pt-20 px-6 md:px-12 lg:px-24 bg-transparent">
       
-      {/* --- LOGO WITHOUT BLEND MODE --- */}
+      {/* --- LOGO LINKED TO LINKEDIN --- */}
       <motion.div 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -51,7 +51,6 @@ const Hero: React.FC = () => {
           <img 
             src="/Portfolio/WebsiteLogo2.png" 
             alt="Maged Al Hilali Logo" 
-            // mix-blend-difference has been removed
             className="w-20 md:w-28 h-auto hover:scale-105 transition-all duration-300 backdrop-blur-[2px] brightness-110" 
           />
         </a>
@@ -98,6 +97,7 @@ const Hero: React.FC = () => {
             </motion.div>
 
             <motion.div variants={itemVariants} className="flex gap-6 relative z-50 pointer-events-auto">
+              {/* LINKEDIN BUTTON */}
               <a 
                 href="https://www.linkedin.com/in/maged-mohammed-al-hilali-298764277/"
                 target="_blank"
@@ -110,8 +110,10 @@ const Hero: React.FC = () => {
                 </span>
               </a>
               
+              {/* DOWNLOAD CV BUTTON UPDATED */}
               <a 
-                href="#" 
+                href="/Portfolio/Maged_Al_Hilali_CV.pdf" 
+                download="Maged_Al_Hilali_CV.pdf"
                 className="group relative px-6 py-3 border border-offwhite/30 rounded-full overflow-hidden flex items-center gap-2 transition-all hover:border-offwhite"
               >
                 <span className="absolute inset-0 w-full h-full bg-offwhite transform translate-y-full transition-transform duration-300 group-hover:translate-y-0 ease-out" />
