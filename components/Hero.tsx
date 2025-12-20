@@ -33,26 +33,29 @@ const Hero: React.FC = () => {
   return (
     <section className="relative h-screen flex flex-col justify-center w-full pt-20 px-6 md:px-12 lg:px-24 bg-transparent">
       
-      {/* --- REFINED LOGO WITH BLEND MODE & GLASSMORPHISM --- */}
+      {/* --- LOGO WITHOUT BLEND MODE --- */}
       <motion.div 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.5 }}
         className="absolute top-8 left-8 md:top-12 md:left-12 z-30 pointer-events-auto"
       >
-        <div className="relative group">
-          {/* Subtle glow/shadow that only shows on hover */}
+        <a 
+          href="https://www.linkedin.com/in/maged-mohammed-al-hilali-298764277/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block relative group"
+        >
           <div className="absolute inset-0 bg-white/5 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           
           <img 
             src="/Portfolio/WebsiteLogo2.png" 
             alt="Maged Al Hilali Logo" 
-            // mix-blend-difference allows the logo to invert colors based on the background
-            className="w-20 md:w-28 h-auto hover:scale-105 transition-all duration-300 mix-blend-difference backdrop-blur-[2px] brightness-110" 
+            // mix-blend-difference has been removed
+            className="w-20 md:w-28 h-auto hover:scale-105 transition-all duration-300 backdrop-blur-[2px] brightness-110" 
           />
-        </div>
+        </a>
       </motion.div>
-      {/* ------------------------- */}
 
       <motion.div
         variants={containerVariants}
