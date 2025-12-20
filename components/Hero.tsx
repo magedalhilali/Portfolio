@@ -33,19 +33,24 @@ const Hero: React.FC = () => {
   return (
     <section className="relative h-screen flex flex-col justify-center w-full pt-20 px-6 md:px-12 lg:px-24 bg-transparent">
       
-      {/* --- LOGO --- */}
+      {/* --- REFINED LOGO WITH BLEND MODE & GLASSMORPHISM --- */}
       <motion.div 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.5 }}
         className="absolute top-8 left-8 md:top-12 md:left-12 z-30 pointer-events-auto"
       >
-        <img 
-          src="/Portfolio/WebsiteLogo.png" 
-          alt="Maged Al Hilali Logo" 
-          // MODIFIED SIZES HERE: w-20 (80px) on mobile, md:w-28 (112px) on desktop
-          className="w-20 md:w-28 h-auto hover:scale-105 transition-transform duration-300" 
-        />
+        <div className="relative group">
+          {/* Subtle glow/shadow that only shows on hover */}
+          <div className="absolute inset-0 bg-white/5 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          
+          <img 
+            src="/Portfolio/WebsiteLogo.png" 
+            alt="Maged Al Hilali Logo" 
+            // mix-blend-difference allows the logo to invert colors based on the background
+            className="w-20 md:w-28 h-auto hover:scale-105 transition-all duration-300 mix-blend-difference backdrop-blur-[2px] brightness-110" 
+          />
+        </div>
       </motion.div>
       {/* ------------------------- */}
 
@@ -73,15 +78,10 @@ const Hero: React.FC = () => {
           </motion.h1>
         </div>
         
-        {/* Wrapper for the bottom section */}
         <div className="mt-12 md:mt-16">
-          
-          {/* --- BORDER LINE --- */}
           <div className="w-full h-px bg-white mb-8 mix-blend-exclusion" />
 
           <div className="flex flex-col md:flex-row md:items-center justify-between">
-            
-            {/* --- DESCRIPTION --- */}
             <motion.div 
               variants={itemVariants} 
               className="max-w-lg mb-8 md:mb-0 mix-blend-exclusion"
@@ -94,7 +94,6 @@ const Hero: React.FC = () => {
               </p>
             </motion.div>
 
-            {/* --- BUTTONS --- */}
             <motion.div variants={itemVariants} className="flex gap-6 relative z-50 pointer-events-auto">
               <a 
                 href="https://www.linkedin.com/in/maged-mohammed-al-hilali-298764277/"
@@ -122,7 +121,6 @@ const Hero: React.FC = () => {
         </div>
       </motion.div>
 
-      {/* --- SCROLL INDICATOR --- */}
       <motion.div
         style={{ opacity: scrollIndicatorOpacity }}
         initial={{ opacity: 0 }}
