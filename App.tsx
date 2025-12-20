@@ -70,17 +70,6 @@ const App: React.FC = () => {
   return (
     <div ref={scrollRef} className="relative min-h-screen text-offwhite font-sans selection:bg-offwhite selection:text-charcoal cursor-none">
       <CustomCursor />
-
-      {/* --- LOGO WITH REPO PATH FIX --- */}
-      <motion.img 
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-        src="/Portfolio/WebsiteLogo.png" 
-        alt="Logo" 
-        className="fixed top-6 left-6 md:top-10 md:left-10 z-50 w-10 md:w-12 h-auto cursor-pointer hover:scale-110 transition-transform duration-300"
-        onClick={handleBackToHome}
-      />
       
       <UnicornBackground />
       
@@ -93,7 +82,9 @@ const App: React.FC = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
           >
+            {/* The Logo will now be inside this Hero component */}
             <Hero />
+            
             <main className="relative z-10">
               <BackgroundPattern>
                 <BentoGrid onProjectSelect={handleProjectSelect} />
@@ -128,6 +119,7 @@ const App: React.FC = () => {
         )}
       </AnimatePresence>
       
+      {/* Background Noise/Texture overlay */}
       <div className="fixed inset-0 z-0 pointer-events-none opacity-[0.03]" 
            style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}>
       </div>
