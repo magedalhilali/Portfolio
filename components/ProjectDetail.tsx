@@ -40,7 +40,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({
 
   const getEmbedUrl = (id: string) => {
     const origin = typeof window !== 'undefined' ? window.location.origin : '';
-    return `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&origin=${origin}`;
+    return `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&origin=${origin}`;
   };
 
   return (
